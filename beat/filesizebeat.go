@@ -1,3 +1,6 @@
+// author: Rémi Desgrange
+// date : 18/01/16
+
 package beat
 
 import (
@@ -19,6 +22,7 @@ type FileSizeBeat struct {
   done chan struct{}
 }
 
+//TODO maybe need a isDir flag 
 type DirSize struct {
   size int64
   nbFile int64
