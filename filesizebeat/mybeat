@@ -1,0 +1,28 @@
+2016-01-18T21:23:55+01:00 DBG  Disable stderr logging
+2016-01-18T21:23:55+01:00 DBG  Initializing output plugins
+2016-01-18T21:23:55+01:00 INFO GeoIP disabled: No paths were set under output.geoip.paths
+2016-01-18T21:23:55+01:00 WARN Redis Output is deprecated. Please use the Redis Output Plugin from Logstash instead.
+2016-01-18T21:23:55+01:00 INFO Reconnect Interval set to: 1s
+2016-01-18T21:23:55+01:00 INFO [RedisOutput] Using Redis server 127.0.0.1:6379
+2016-01-18T21:23:55+01:00 INFO [RedisOutput] Redis connection timeout 5s
+2016-01-18T21:23:55+01:00 INFO [RedisOutput] Redis reconnect interval 1s
+2016-01-18T21:23:55+01:00 INFO [RedisOutput] Using index pattern filebeat
+2016-01-18T21:23:55+01:00 INFO [RedisOutput] Topology expires after 15s
+2016-01-18T21:23:55+01:00 INFO [RedisOutput] Using db 1 for storing events
+2016-01-18T21:23:55+01:00 INFO [RedisOutput] Using db 1 for storing topology
+2016-01-18T21:23:55+01:00 INFO [RedisOutput] Using 0 data type
+2016-01-18T21:23:55+01:00 INFO Activated redis as output plugin.
+2016-01-18T21:23:55+01:00 DBG  Create output worker
+2016-01-18T21:23:55+01:00 DBG  No output is defined to store the topology. The server fields might not be filled.
+2016-01-18T21:23:55+01:00 INFO Publisher name: KZS-PORT-DESGR
+2016-01-18T21:23:55+01:00 INFO Flush Interval set to: 1s
+2016-01-18T21:23:55+01:00 INFO Max Bulk Size set to: 2048
+2016-01-18T21:23:55+01:00 DBG  create bulk processing worker (interval=1s, bulk size=2048)
+2016-01-18T21:23:55+01:00 INFO Init Beat: filesizebeat; Version: 0.0.1
+2016-01-18T21:23:55+01:00 DBG  Period 10s
+
+2016-01-18T21:23:55+01:00 DBG  Paths : [  C:\\Program Files\\NSClient++ ./]
+
+2016-01-18T21:23:55+01:00 INFO filesizebeat sucessfully setup. Start running.
+2016-01-18T21:23:55+01:00 INFO ticker 10s
+2016-01-18T21:23:55+01:00 DBG  Windows is interactive: true
