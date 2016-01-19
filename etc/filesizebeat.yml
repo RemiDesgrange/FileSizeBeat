@@ -2,7 +2,7 @@ input:
   paths:
     - C:\\Program Files\\NSClient++
     - ./
-  period: 10
+  period: 2
 
 output:
   # quick test
@@ -149,9 +149,9 @@ output:
 
 
   ### Console output
-  console:
+  #console:
     # Pretty print json event
-    pretty: true
+    #pretty: true
 
 ############################# Shipper #########################################
 
@@ -209,7 +209,7 @@ logging:
     path: filesizebeat
 
     # The name of the files where the logs are written to.
-    name: mybeat
+    name: FSbeat.log
 
     # Configure log file size limit. If limit is reached, log file will be
     # automatically rotated
