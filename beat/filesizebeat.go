@@ -78,7 +78,6 @@ func (fs *FileSizeBeat) Setup(b *beat.Beat) error {
 func (fs *FileSizeBeat) Run(b *beat.Beat) error {
 
 	for _, onepath := range fs.paths {
-
 		go func(onepath Path){
 			ticker := time.NewTicker(fs.period)
 			defer ticker.Stop()
@@ -88,38 +87,27 @@ func (fs *FileSizeBeat) Run(b *beat.Beat) error {
 					logp.Debug("filesizebeat", "done in %v path ", onepath.path)
 				}
 				case <-ticker.C: {
-					ds := DirSize{}
-					err := filepath.Walk(onepath.path, func(path string, info os.FileInfo, err error) error {
-						if err != nil {
-							return err
-						}
-						if info.IsDir() {
-							ds.nbFolder += 1
-						} else {
-							ds.nbFile += 1
-							ds.size += info.Size()
-						}
-						return nil
-					})
-					if (err == nil) && (ds != DirSize{}) {
-						event := common.MapStr{
-							"@timestamp": common.Time(time.Now()),
-							"type": "filesizebeat",
-							"path": onepath.path,
-							"nbFolder": ds.nbFolder,
-							"nbFile": ds.nbFile,
-							"isDir": onepath.isDir,
-							"size": ds.size,
-						}
-						fs.events.PublishEvent(event)
-					} else {
-						logp.Err("Error while filepathWalk %v, Path %v, (DirSize %v)\n", err, onepath, ds)
+					logp.Debug("filesizebeat", "Clock ticking")
+					c := make(chan bool)
+					go fs.walk(onepath, c)
+					select {
+					case <- c:
+					{
+						break
 					}
+ 					case <- time.After(fs.period):
+					{
+						logp.Err("Exeed time of %v for path %v, ignoring rec", fs.period, onepath.path)
+						break
+					}
+					}
+
 				}
 				}
 			}
 		}(onepath)
 	}
+	logp.Info("Exiting loop, do nothing by now")
 	<- fs.done
 	return nil
 }
@@ -155,4 +143,43 @@ func (fs *FileSizeBeat) AddPath(target string) error {
 	fs.paths = append(fs.paths, newPath)
 	logp.Debug("filesizebeat", "Append %v to the folder to monitor", newPath)
 	return nil
+}
+
+func (fs *FileSizeBeat) walk(target Path, c chan bool) error {
+	ds := DirSize{}
+	err := filepath.Walk(target.path, func(path string, info os.FileInfo, err error) error {
+	if err != nil {
+			return err
+	}
+	if info.IsDir() {
+		ds.nbFolder += 1
+	} else {
+		ds.nbFile += 1
+		ds.size += info.Size()
+	}
+	return nil
+	})
+	if err != nil {
+		return err
+	}
+	fs.send(&target, &ds)
+	c <- true
+	return nil
+}
+
+func (fs *FileSizeBeat) send(target *Path, ds *DirSize){
+	if (*ds != DirSize{}) {
+		event := common.MapStr{
+			"@timestamp": common.Time(time.Now()),
+			"type": "filesizebeat",
+			"path": target.path,
+			"nbFolder": ds.nbFolder,
+			"nbFile": ds.nbFile,
+			"isDir": target.isDir,
+			"size": ds.size,
+		}
+		fs.events.PublishEvent(event)
+	} else {
+		logp.Err("Error while filepathWalk: Path %v, (DirSize %v)\n", &target, &ds)
+	}
 }

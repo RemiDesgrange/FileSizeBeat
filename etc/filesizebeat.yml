@@ -1,8 +1,9 @@
 input:
   paths:
-    - C:\\Program Files\\NSClient++
-    - ./
-  period: 2
+    - C:/Program Files/NSClient++
+    - D:/
+    - C:/Users/desgrange/Documents/Dev/Go
+  period: 5
 
 output:
   # quick test
@@ -206,10 +207,10 @@ logging:
   # To enable logging to files, to_files option has to be set to true
   files:
     # The directory where the log files will written to.
-    path: filesizebeat
+    path: fsbLog
 
     # The name of the files where the logs are written to.
-    name: FSbeat.log
+    name: fsb.log
 
     # Configure log file size limit. If limit is reached, log file will be
     # automatically rotated
