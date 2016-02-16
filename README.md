@@ -8,13 +8,13 @@ pull-request are welcome
 
 ## Requirements
 
-FileSizeBeat require beat from [here](https://github.com/elastic/beats/)
+filesizebeat require beat from [here](https://github.com/elastic/beats/)
 
 ## Install
 
 You need [Go](https://golang.org/doc/install).
 
-Fetch this package via `go get -u github.com/remidesgrange/filesizebeat`. The
+Fetch this package via `git clone https://github.com/remidesgrange/filesizebeat`. The
 resulting binary will be in `$GOPATH/bin`
 
 ## Usage

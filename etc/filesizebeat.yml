@@ -1,16 +1,15 @@
 input:
   paths:
-    - C:/Program Files/NSClient++
-    - D:/
-    - C:/Users/desgrange/Documents/Dev/Go
-  period: 5
+    - C:/Users/desgrange/Documents/Task List.pdf
+    - C:/Users/desgrange/Documents/Dev/PLADSA/FileSizeBeat/fsbLog
+  period: 10
 
 output:
   # quick test
   redis:
     host: "127.0.0.1"
     port: 6379
-    data_type: "list"
+    datatype: "channel"
     index: "filesizebeat"
     db: 1
   ### Elasticsearch as output
