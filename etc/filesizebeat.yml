@@ -1,7 +1,7 @@
 input:
   paths:
-    - C:/Users/desgrange/Documents/Task List.pdf
-    - C:/Users/desgrange/Documents/Dev/PLADSA/FileSizeBeat/fsbLog
+    - C:/Users/desgrange/Documents/Dev/PLADSA/FileSizeBeat/etc
+    - C:/Users/desgrange/Documents/Dev/PLADSA/pladsa/Database/Beat.db
   period: 10
 
 output:
